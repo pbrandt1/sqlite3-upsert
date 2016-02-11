@@ -2,6 +2,7 @@ var upsert = require('../')
 var sql = require('sqlite3')
 var db = new sql.Database('test.db')
 var upsert_product = upsert({table: 'products', key: 'id', db: db})
+var upsert_people = upsert({table: 'people', key: 'id', db: db})
 var should = require('should')
 
 describe('upsert', function() {
@@ -9,7 +10,9 @@ describe('upsert', function() {
   before(function(done) {
     db.serialize(function() {
       db.run('drop table if exists products')
-      db.run('create table products (id text, val text)', done)
+      db.run('create table products (id text, val text)')
+      db.run('drop table if exists people')
+      db.run('create table people (id text, val text)', done)
     })
 
   })
@@ -52,6 +55,22 @@ describe('upsert', function() {
       product.val.should.equal('something')
       // let's double check
       db.all('select * from products', function(e, products) {
+        should.not.exist(e)
+        products.length.should.equal(1)
+        products[0].id.should.equal('a')
+        products[0].val.should.equal('something')
+        done();
+      })
+    })
+  })
+
+  it('should work with multiple tables', function(done) {
+    upsert_people({id: 'a', val: 'something'}, function(e, product) {
+      should.not.exist(e)
+      product.id.should.equal('a')
+      product.val.should.equal('something')
+      // let's double check
+      db.all('select * from people', function(e, products) {
         should.not.exist(e)
         products.length.should.equal(1)
         products[0].id.should.equal('a')
