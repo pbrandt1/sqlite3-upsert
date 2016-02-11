@@ -1,0 +1,29 @@
+{
+  "name": "sqlite3-upsert",
+  "version": "1.0.0",
+  "description": "upserts for the sqlite3 module",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pbrandt1/sqlite3-upsert.git"
+  },
+  "keywords": [
+    "upsert",
+    "sqlite",
+    "sqlite3"
+  ],
+  "author": "Peter Brandt <peter.m.brandt@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pbrandt1/sqlite3-upsert/issues"
+  },
+  "homepage": "https://github.com/pbrandt1/sqlite3-upsert#readme",
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "should": "^8.2.2",
+    "sqlite3": "^3.1.1"
+  }
+}
